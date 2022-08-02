@@ -14,10 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_LayerNames:
   - Default
-  - 
-  - 
-  - 
-  - 
+  - Hats
+  - Challenge01_Model
+  - Challenge01_Clipboard
+  - Challenge01_MeasuringStick
   - 
   - 
   - 
