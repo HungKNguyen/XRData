@@ -4,7 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Hung Room.unity
+    guid: 99c9720ab356a0642a771bea13969a05
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: ea3ff5cf660a54e8385d920a7c96806e, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 21ef6972e855041b0b58e45a46021a3f, type: 2}
