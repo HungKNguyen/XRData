@@ -43,14 +43,27 @@ public class CustomController : MonoBehaviour
         // Innitiate menu
         menu.setCurrent(tool);
         // Set up tool
+        ConfigureTool();
         ActivateTool();
     }
 
+    // Set tool state and ask manager to configure tool
+    void ConfigureTool() 
+    { 
+        if (tool == Tool.Locomotion) {
+        } else if (tool == Tool.Tranformation) {
+            scaleToggle = false;
+            rotateToggle = false;
+        } else if (tool == Tool.Examine) {
+        }
+        manager.ConfigureToolFor(controller, tool);    
+    }
+
+    // Set tool active and ask manager to activate tool
     void ActivateTool()
     {
         if (tool == Tool.Locomotion) {
             locomotionActive = true;
-            manager.EnableSnapTurnFor(controller);
         } else if (tool == Tool.Tranformation) {
             transformActive = true;
             scaleToggle = false;
@@ -58,18 +71,20 @@ public class CustomController : MonoBehaviour
         } else if (tool == Tool.Examine) {
             examineActive = true;
         }
+        manager.ActivateToolFor(controller);
     }
 
+    // Set tool inactive and ask manager to disable tool
     void DisableTool()
     {
         if (tool == Tool.Locomotion) {
             locomotionActive = false;
-            manager.DisableSnapTurnFor(controller);
         } else if (tool == Tool.Tranformation) {
             transformActive = false;
         } else if (tool == Tool.Examine) {
             examineActive = false;
         }
+        manager.DisableToolFor(controller);
     }
 
     // To open/close menu
@@ -95,6 +110,7 @@ public class CustomController : MonoBehaviour
     {
         if (menuToggle && menuChoosing != MenuChoice.None) {
             tool = (Tool) menuChoosing;
+            ConfigureTool();
             menu.setCurrent(tool);
         }
     }

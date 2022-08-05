@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 8294228}
   - component: {fileID: 8294227}
   - component: {fileID: 8294226}
+  - component: {fileID: 8294231}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -172,10 +173,34 @@ MonoBehaviour:
       m_Calls: []
   m_HoverEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8294231}
+        m_TargetAssemblyTypeName: CustomDebug, Assembly-CSharp
+        m_MethodName: Logging
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: '[EDV] Hover entered for Plane'
+          m_BoolArgument: 0
+        m_CallState: 2
   m_HoverExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8294231}
+        m_TargetAssemblyTypeName: CustomDebug, Assembly-CSharp
+        m_MethodName: Logging
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: '[EDV] Hover exited for Plane'
+          m_BoolArgument: 0
+        m_CallState: 2
   m_FirstSelectEntered:
     m_PersistentCalls:
       m_Calls: []
@@ -184,10 +209,34 @@ MonoBehaviour:
       m_Calls: []
   m_SelectEntered:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8294231}
+        m_TargetAssemblyTypeName: CustomDebug, Assembly-CSharp
+        m_MethodName: Logging
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: '[EDV] Select entered for Plane'
+          m_BoolArgument: 0
+        m_CallState: 2
   m_SelectExited:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8294231}
+        m_TargetAssemblyTypeName: CustomDebug, Assembly-CSharp
+        m_MethodName: Logging
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: '[EDV] Select exited for Plane'
+          m_BoolArgument: 0
+        m_CallState: 2
   m_Activated:
     m_PersistentCalls:
       m_Calls: []
@@ -306,6 +355,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8294231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8294225}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b7d340911434ed3bf29abebac4c47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &203844586
 GameObject:
   m_ObjectHideFlags: 0
@@ -560,8 +621,8 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   m_InvalidColorGradient:
     serializedVersion: 2
-    key0: {r: 0, g: 0.09811401, b: 1, a: 1}
-    key1: {r: 0, g: 0.09411766, b: 1, a: 1}
+    key0: {r: 1, g: 0, b: 0.06666667, a: 1}
+    key1: {r: 0.9294118, g: 0.039215688, b: 0.09019608, a: 1}
     key2: {r: 0, g: 0, b: 0, a: 0}
     key3: {r: 0, g: 0, b: 0, a: 0}
     key4: {r: 0, g: 0, b: 0, a: 0}
@@ -708,7 +769,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 64
+    m_Bits: 128
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -976,7 +1037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e79d11885ca47b1b8c6e18375d845a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tool: 1
+  tool: 2
   menu: {fileID: 1322965833}
   controller: 1
   manager: {fileID: 2036246852}
@@ -1020,6 +1081,10 @@ PrefabInstance:
     - target: {fileID: 180529470106078049, guid: 8e4a7b3cadb614b3ea273fb13fd02d87, type: 3}
       propertyPath: m_Name
       value: Primitive Select Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 180529470106078049, guid: 8e4a7b3cadb614b3ea273fb13fd02d87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1429657284396462776, guid: 8e4a7b3cadb614b3ea273fb13fd02d87, type: 3}
       propertyPath: m_RootOrder
@@ -1414,6 +1479,7 @@ GameObject:
   - component: {fileID: 1471523987}
   - component: {fileID: 1471523992}
   - component: {fileID: 1471523991}
+  - component: {fileID: 1471523993}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1654,6 +1720,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &1471523993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471523986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b7d340911434ed3bf29abebac4c47f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1622462885
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,13 +1943,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b2a6b7d88012446d8b67cb7fa87bc9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  settings:
+  snapTurnProviderSettings:
   - {fileID: 3902280370758301160, guid: d6ddaef4c57cd455d9ad086b383a7280, type: 3}
   - {fileID: 8898019886191278978, guid: 678ede007b4a3424e821680c487c03ef, type: 3}
   - {fileID: 2241375498052158353, guid: f65f3d326e6544d0e9777438af24f454, type: 3}
   - {fileID: 7786988668495303772, guid: b388f952ddd7a4491a45ed258c568fe0, type: 3}
-  system: {fileID: 2036246848}
+  rayInteractorSettings:
+  - {fileID: 7376862233873721549, guid: 9c7553c9455e245b8837227c79f84952, type: 3}
+  - {fileID: 6822564544897059020, guid: c23e46412c59b40468f8fc4b0826b208, type: 3}
+  - {fileID: 4682146341986174425, guid: 24a8f690cf7414a5bbab31fcddee88d2, type: 3}
+  lineVisualSettings:
+  - {fileID: 7608852330919179575, guid: bc53970da506d49afac8db91f456f59d, type: 3}
+  - {fileID: 1960925283226056562, guid: 2c44712d7aa404ae08fcd3dbb6ae8b3d, type: 3}
+  - {fileID: 5151452014224360651, guid: e8e94b5aa978b45939589e200165e125, type: 3}
+  xRInteractionManager: {fileID: 1243489734}
+  locomotionSystem: {fileID: 2036246848}
   snapTurnProvider: {fileID: 2036246851}
+  leftRayInteractor: {fileID: 2053774674}
+  leftLineVisual: {fileID: 2053774672}
+  leftLineRenderer: {fileID: 2053774673}
+  leftXRController: {fileID: 2053774675}
+  rightRayInteractor: {fileID: 544366644}
+  rightLineVisual: {fileID: 544366642}
+  rightLineRenderer: {fileID: 544366643}
+  rightXRController: {fileID: 544366645}
 --- !u!1 &2053774670
 GameObject:
   m_ObjectHideFlags: 0
@@ -2128,7 +2223,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   m_InteractionLayers:
-    m_Bits: 32
+    m_Bits: 64
   m_AttachTransform: {fileID: 0}
   m_KeepSelectedTargetValid: 1
   m_StartingSelectedInteractable: {fileID: 0}
@@ -2189,7 +2284,7 @@ MonoBehaviour:
   m_PlayHapticsOnHoverCanceled: 0
   m_HapticHoverCancelIntensity: 0
   m_HapticHoverCancelDuration: 0
-  m_LineType: 2
+  m_LineType: 0
   m_BlendVisualLinePoints: 1
   m_MaxRaycastDistance: 30
   m_RayOriginTransform: {fileID: 0}
@@ -2209,10 +2304,10 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2147483647
   m_RaycastTriggerInteraction: 1
-  m_HitClosestOnly: 0
+  m_HitClosestOnly: 1
   m_HoverToSelect: 0
   m_HoverTimeToSelect: 0.5
-  m_EnableUIInteraction: 1
+  m_EnableUIInteraction: 0
   m_AllowAnchorControl: 0
   m_UseForceGrab: 0
   m_RotateSpeed: 180
@@ -2396,7 +2491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65e79d11885ca47b1b8c6e18375d845a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tool: 0
+  tool: 1
   menu: {fileID: 911795382}
   controller: 0
   manager: {fileID: 2036246852}
@@ -2440,6 +2535,10 @@ PrefabInstance:
     - target: {fileID: 180529470106078049, guid: 8e4a7b3cadb614b3ea273fb13fd02d87, type: 3}
       propertyPath: m_Name
       value: Primitive Select Tool
+      objectReference: {fileID: 0}
+    - target: {fileID: 180529470106078049, guid: 8e4a7b3cadb614b3ea273fb13fd02d87, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1429657284396462776, guid: 8e4a7b3cadb614b3ea273fb13fd02d87, type: 3}
       propertyPath: m_RootOrder
