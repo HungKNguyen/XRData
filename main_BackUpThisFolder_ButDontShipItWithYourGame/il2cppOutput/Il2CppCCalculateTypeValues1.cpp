@@ -5387,16 +5387,22 @@ struct CustomController_t75A751B822B51284734617DD299D31FB9ADF4DD7  : public Mono
 	int32_t ___controller_9;
 	// CustomManager CustomController::manager
 	CustomManager_t54F7A3E7F26FA60338C97B5D40EC15E9AB8BA840* ___manager_10;
+	// UnityEngine.XR.Interaction.Toolkit.XRRayInteractor CustomController::interactor
+	XRRayInteractor_t0B25C1D5A938B199A71908E189AB351B43DA4C76* ___interactor_11;
 	// System.Boolean CustomController::locomotionActive
-	bool ___locomotionActive_11;
+	bool ___locomotionActive_12;
 	// System.Boolean CustomController::transformActive
-	bool ___transformActive_12;
+	bool ___transformActive_13;
 	// System.Boolean CustomController::examineActive
-	bool ___examineActive_13;
-	// System.Boolean CustomController::scaleToggle
-	bool ___scaleToggle_14;
+	bool ___examineActive_14;
 	// System.Boolean CustomController::rotateToggle
 	bool ___rotateToggle_15;
+	// System.Single CustomController::scaleSpeed
+	float ___scaleSpeed_16;
+	// System.Single CustomController::translateSpeed
+	float ___translateSpeed_17;
+	// System.Single CustomController::rotateSpeed
+	float ___rotateSpeed_18;
 };
 
 // CustomDebug

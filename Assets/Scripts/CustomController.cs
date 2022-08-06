@@ -22,8 +22,11 @@ public class CustomController : MonoBehaviour
     // Keep state to manipulate library locomotion system
     [SerializeField] Controller controller;
 
-    // Keep record of Controller Manager
+    // Keep reference of Controller Manager
     [SerializeField] CustomManager manager;
+
+    // Keep reference of the Interactor
+    XRRayInteractor interactor;
 
     // Keep state of tools
     bool locomotionActive;
@@ -31,8 +34,11 @@ public class CustomController : MonoBehaviour
     bool examineActive;
 
     // Keep state of the Transformation tool
-    bool scaleToggle;
+    // bool scaleToggle;  // No longer needed
     bool rotateToggle;
+    float scaleSpeed = 1.0f;
+    float translateSpeed = 1.0f;
+    float rotateSpeed = 180.0f;
     
     
     // Start is called before the first frame update
@@ -45,6 +51,8 @@ public class CustomController : MonoBehaviour
         // Set up tool
         ConfigureTool();
         ActivateTool();
+        // Need to keep track of the interactor
+        interactor = GetComponent<XRRayInteractor>();
     }
 
     // Set tool state and ask manager to configure tool
@@ -52,7 +60,7 @@ public class CustomController : MonoBehaviour
     { 
         if (tool == Tool.Locomotion) {
         } else if (tool == Tool.Tranformation) {
-            scaleToggle = false;
+            // scaleToggle = false;
             rotateToggle = false;
         } else if (tool == Tool.Examine) {
         }
@@ -66,8 +74,6 @@ public class CustomController : MonoBehaviour
             locomotionActive = true;
         } else if (tool == Tool.Tranformation) {
             transformActive = true;
-            scaleToggle = false;
-            rotateToggle = false;
         } else if (tool == Tool.Examine) {
             examineActive = true;
         }
@@ -115,14 +121,14 @@ public class CustomController : MonoBehaviour
         }
     }
 
-    // Pressing this will toggle scale
-    public void OnScaleToggle()
-    {
-        if (transformActive) {
-            scaleToggle = !scaleToggle;
-            Debug.Log($"[EDV] Scale Toggle set to {scaleToggle}");
-        }
-    }
+    // No longer needed
+    // public void OnScaleToggle()
+    // {
+    //     if (transformActive) {
+    //         scaleToggle = !scaleToggle;
+    //         // Debug.Log($"[EDV] Scale Toggle set to {scaleToggle}");
+    //     }
+    // }
 
     // Have not implemented
     public void OnRotationModifier(InputValue value)
@@ -139,7 +145,7 @@ public class CustomController : MonoBehaviour
             {
                 rotateToggle = false;
             }
-            Debug.Log($"[EDV] Rotate Modifier set to {rotateToggle}");
+            // Debug.Log($"[EDV] Rotate Modifier set to {rotateToggle}");
         }
     }
 
@@ -164,28 +170,86 @@ public class CustomController : MonoBehaviour
                 }
             }
             menu.setChoosing(menuChoosing);
-        } else if (transformActive) {
-            if (scaleToggle) {
-                // Do things for scale (vertical values)
-                Debug.Log("[EDV] Thumbstick for scale");
-            } else if (rotateToggle) {
+        } 
+        else if (transformActive && interactor.hasSelection) {
+            // Grab current object being selected
+            Transform interactableTransform = interactor.firstInteractableSelected.transform;
+            if (rotateToggle) {
                 // Do things for rotate X (Veritcal) Z (Horizontal)
-                Debug.Log("[EDV] Thumbstick for rotate");
+                RotateAnchor(interactableTransform, Vector3.forward, rawValue.x);
+                RotateAnchor(interactableTransform, Vector3.right, rawValue.y);
             } else {
                 // Default, also called anchor, vertical push and pull, horizontal rotate Y
-                Debug.Log("[EDV] Thumbstick for achor");
+                // Debug.Log("[EDV] Thumbstick for achor");
+                RotateAnchor(interactableTransform, Vector3.up, rawValue.x);
+                TranslateAnchor(rawValue.y);
             }
+        } else if (examineActive && interactor.hasSelection) {
+            Transform interactableTransform = interactor.firstInteractableSelected.transform;
+            ScaleAnchor(interactableTransform, rawValue.y);
         }
-        Debug.Log($"[EDV] Thumbstick register X : {rawValue.x}, Y : {rawValue.y}");
+        // Debug.Log($"[EDV] Thumbstick register X : {rawValue.x}, Y : {rawValue.y}");
     }
 
-    // This function call to deselect the current interactable (search force drop object - like in shooting games)
-    // and then reset the object to be in front of the user, looking at the user, and at 0.5 height
+    // Quality of life, just push/pull the object to 3 meter away
     public void OnResetPosition()
     {
-        if (tool == Tool.Tranformation) {
-            Debug.Log("[EDV] Called Reset position");
+        if ((transformActive || examineActive) && interactor.hasSelection) {
+            var rayOrigin = interactor.rayOriginTransform;
+            var anchor = interactor.attachTransform;
+
+            // Set anchor to 3 meters away
+            var originPosition = rayOrigin.position;
+            var originForward = rayOrigin.forward;
+
+            var resultingPosition = originPosition + Vector3.Normalize(originForward) * 3;      
+            anchor.position = resultingPosition;
         }
+    }
+
+    // Function copied from XR Toolkit Library, and modified a bit
+    void TranslateAnchor(float directionAmount)
+    {
+        if (Mathf.Approximately(directionAmount, 0f))
+            return;
+
+        var rayOrigin = interactor.rayOriginTransform;
+        var anchor = interactor.attachTransform;
+        
+        var originPosition = rayOrigin.position;
+        var originForward = rayOrigin.forward;
+
+        var resultingPosition = anchor.position + originForward * (directionAmount * translateSpeed * Time.deltaTime);
+
+        // Check the delta between the origin position and the calculated position.
+        // Clamp so it doesn't go further back than the origin position.
+        var posInAttachSpace = resultingPosition - originPosition;
+        var dotResult = Vector3.Dot(posInAttachSpace, originForward);
+
+        anchor.position = dotResult > 0f ? resultingPosition : originPosition;
+    }
+
+    // Function copied from XR Toolkit Library
+    void RotateAnchor(Transform interactable, Vector3 direction, float directionAmount)
+    {
+        if (Mathf.Abs(directionAmount) <= 0.2f)
+            return;
+
+        var rotateAngle = directionAmount * (rotateSpeed * Time.deltaTime);
+
+        interactable.Rotate(direction, rotateAngle, Space.World);
+    }
+
+    // Modified, since interactable don't track scale
+    void ScaleAnchor(Transform interactable, float directionAmount)
+    {
+        if (Mathf.Approximately(directionAmount, 0f))
+            return;
+
+        var oldScale = interactable.localScale;
+        var newScale = oldScale + Vector3.one * directionAmount * scaleSpeed * Time.deltaTime;
+        var limitScale = (Vector3.one * 0.05f);
+        interactable.localScale = limitScale.magnitude > newScale.magnitude ? limitScale : newScale;
     }
 
 }
