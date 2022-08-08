@@ -12,3 +12,6 @@ Aug 2nd: Learned about VR Basic (Locomotion and Interactions)
 Aug 2nd: Learning about C# Script in Unity. Guide from https://learn.unity.com/project/beginner-gameplay-scripting?uv=2019.3
 Aug 3rd: Started on the first step of the project, quickly realize that we need custom input (beyond what is provided from the library), switching interactors setting in runtime (cannot be done easily). Solution, learn about Unity new Input System (https://www.raywenderlich.com/9671886-new-unity-input-system-getting-started), write that input system on top of the provided library to include custom inputs. Used a library to create runtime preset (change setting of a component in runtime, pretty handy)
 Aug 4th: Identify need to learn about creating custom 3D models. Guide here https://learn.unity.com/project/asset-management-with-fbx-exporter-probuilder-and-polybrush
+Aug 5th: Spent a lot of time messing with the library and runtime preset, got basic input system to work, time to move on to next part of the main course
+Aug 5th: Resume main course VR Events and Interactions
+Aug 7th: Separate Unity Course and personal VR project
